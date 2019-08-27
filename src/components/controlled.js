@@ -21,26 +21,35 @@ class Controlled extends Component {
         })
     }
 
+    submitHandler =(event) => {
+        event.preventDefault();
+
+        console.log(this.state)
+    }
+
     render(){
         return(
             <div className="container">
-                <div className="form_element">
-                    <label htmlFor="first name">Enter the first name</label>
-                    <input
-                        type="text"
-                        value={this.state.firstName}
-                        onChange={this.handleFirstNameChange}
-                    />
-                </div>
+                <form onSubmit={this.submitHandler}>
+                    <div className="form_element">
+                        <label htmlFor="first name">Enter the first name</label>
+                        <input
+                            type="text"
+                            value={this.state.firstName}
+                            onChange={this.handleFirstNameChange}
+                        />
+                    </div>
 
-                <div className="form_element">
-                    <label htmlFor="last name">Enter the last name</label>
-                    <input
-                        type="text"
-                        value={this.state.lastName}
-                        onChange={this.handleLastNameChange}
-                    />
-                </div>
+                    <div className="form_element">
+                        <label htmlFor="last name">Enter the last name</label>
+                        <input
+                            type="text"
+                            value={this.state.lastName}
+                            onChange={this.handleLastNameChange}
+                        />
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
             </div>
         )
     }
