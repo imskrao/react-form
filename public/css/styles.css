@@ -55,6 +55,12 @@ select {
     font-size: 15px;
 }
 
+label {
+    font-size: 18px;
+    display: block;
+    margin-top: 30px;
+}
+
 .label_error {
     color: #FF5722;
     font-weight: 600;
