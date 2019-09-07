@@ -51,8 +51,9 @@ button {
 }
 
 select {
-    width: 236px;
+    width: 278px;
     font-size: 15px;
+    height: 40px;
 }
 
 label {

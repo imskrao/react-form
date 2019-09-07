@@ -55,6 +55,40 @@ export default function FormFields(props) {
                 )
 
                 break;
+
+            case('textarea'):
+                formTemplate = (
+                    <div>
+                        {showLable(value.label, value.labelText)}
+                        <textarea {...value.config}
+                        value={value.value}
+                            onChange={
+                                (event) => changeHandler(event, data.id)
+                            }>
+                            </textarea>
+                    </div>
+                )
+                break;
+            case('select'):
+                formTemplate = (
+                    <div>
+                        {showLable(value.label, value.labelText)}
+                        <select
+                            value={value.value}
+                            name={value.config.name}
+                            onChange={
+                                (event) => changeHandler(event, data.id)
+                            }
+                            >
+                                {value.config.options.map((item, i) => {
+                                    return (
+                                        <option key={i} value={item.val}>{item.text}</option>
+                                    )
+                                })}
+                        </select>
+                    </div>
+                )
+                break;
             default:
                 formTemplate = null;
         }
