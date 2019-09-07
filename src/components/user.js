@@ -15,7 +15,14 @@ class User extends Component {
                         name: 'firstname_input',
                         type: 'text',
                         placeholder: 'Enter your first name'
-                    }
+                    },
+                    validation: {
+                        required: true,
+                        minLen: '3'
+                    },
+                    valid: false,
+                    touched: false,
+                    validationMessage: ''
                 },
                 lastName: {
                     element: 'input',
@@ -26,7 +33,14 @@ class User extends Component {
                         name: 'lastname_input',
                         type: 'text',
                         placeholder: 'Enter your last name'
-                    }
+                    },
+                    validation: {
+                        required: true,
+                        minLen: '3'
+                    },
+                    valid: false,
+                    touched: false,
+                    validationMessage: ''
                 },
                 email: {
                     element: 'input',
@@ -37,7 +51,13 @@ class User extends Component {
                         name: 'email_input',
                         type: 'email',
                         placeholder: 'Enter your Email Address'
-                    }
+                    },
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false,
+                    validationMessage: ''
                 },
                 age: {
                     element: 'select',
@@ -51,7 +71,11 @@ class User extends Component {
                             {val:'2', text: '20-30'},
                             {val:'3', text: '30+'}
                         ]
-                    }
+                    },
+                    validation: {
+                        required: false
+                    },
+                    valid: true
                 },
                 message: {
                     element: 'textarea',
@@ -62,7 +86,11 @@ class User extends Component {
                         name: 'message_input',
                         rows: 4,
                         cols:36
-                    }
+                    },
+                    validation: {
+                        required: false
+                    },
+                    valid: true
                 }
             }
         }
@@ -72,12 +100,21 @@ class User extends Component {
         event.preventDefault();
 
         let dataToSubmit = {};
+        let formIsValid = true;
 
         for(let key in this.state.formData) {
             dataToSubmit[key] = this.state.formData[key].value;
         }
 
-        console.log(dataToSubmit);
+        for(let key in this.state.formData) {
+            formIsValid = this.state.formData[key].valid && formIsValid;
+
+            // console.log(this.state.formData[key].valid);
+        }
+
+        if(formIsValid) {
+            console.log(dataToSubmit);
+        }
     }
 
     updateForm = (newState) => {
@@ -90,7 +127,11 @@ class User extends Component {
         return(
             <div className="container">
                 <form onSubmit={this.submitForm}>
-                    <FormFields formData={this.state.formData} change={(newState) => this.updateForm(newState)}/>
+                    <FormFields
+                        formData={this.state.formData}
+                        onblur={(newState) => this.updateForm(newState)}
+                        change={(newState) => this.updateForm(newState)}
+                    />
                     <button type="submit">Submit</button>
                 </form>
             </div>
